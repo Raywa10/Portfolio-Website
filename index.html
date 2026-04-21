@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raywa Singh — CTO & Full-Stack Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #04040a;
+      --bg2: #08080f;
+      --bg3: #0d0d1a;
+      --green: oklch(83% 0.22 155);
+      --violet: oklch(67% 0.26 295);
+      --text: #eeedf5;
+      --muted: rgba(238,237,245,0.45);
+      --border: rgba(238,237,245,0.08);
+      --card: rgba(255,255,255,0.03);
+      --card-hover: rgba(255,255,255,0.06);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      z-index: 100;
+      display: flex; align-items: center; gap: 32px;
+      padding: 12px 28px;
+      background: rgba(4,4,10,0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.3s;
+    }
+    nav a {
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    .nav-logo {
+      color: var(--text); font-weight: 700; font-size: 14px;
+      background: linear-gradient(135deg, var(--green), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-cta {
+      padding: 7px 16px;
+      background: var(--green);
+      color: #04040a !important;
+      border-radius: 100px;
+      font-weight: 600;
+      -webkit-text-fill-color: #04040a;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 80px 24px;
+      overflow: hidden;
+    }
+
+    #particle-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 12px; font-family: var(--font-mono);
+      color: var(--green);
+      margin-bottom: 28px;
+      background: rgba(0,232,150,0.05);
+      animation: fadeUp 0.8s ease both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero-name {
+      font-size: clamp(52px, 9vw, 110px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 16px;
+      animation: fadeUp 0.8s 0.1s ease both;
+      background: linear-gradient(160deg, #fff 30%, rgba(255,255,255,0.55));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-typewriter-wrap {
+      font-size: clamp(20px, 3.5vw, 36px);
+      font-weight: 500;
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s 0.2s ease both;
+      height: 1.4em;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .typewriter-prefix { color: var(--muted); }
+    .typewriter-word {
+      background: linear-gradient(135deg, var(--green), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      border-right: 2px solid var(--green);
+      padding-right: 3px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{border-color:var(--green)}50%{border-color:transparent} }
+
+    .hero-tagline {
+      max-width: 560px;
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 44px;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-tagline strong { color: var(--text); }
+
+    .hero-ctas {
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .btn-primary {
+      padding: 14px 32px;
+      background: var(--green);
+      color: #04040a;
+      border-radius: 100px;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 32px rgba(0,232,150,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 48px rgba(0,232,150,0.5); }
+    .btn-secondary {
+      padding: 14px 32px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 100px;
+      font-weight: 500; font-size: 15px;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(238,237,245,0.25); background: rgba(255,255,255,0.06); }
+
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 11px; font-family: var(--font-mono);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.4; } 50% { opacity: 1; }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 17px; line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── STATS BAR ── */
+    #stats {
+      padding: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .stats-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      padding: 40px 24px;
+    }
+    .stat-item {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 48px; font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--green), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); font-weight: 400; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-text p {
+      color: var(--muted); font-size: 17px; line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), var(--violet), transparent);
+    }
+    .dual-badge {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .badge {
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      font-family: var(--font-mono);
+    }
+    .badge-green { background: rgba(0,232,150,0.12); color: var(--green); border: 1px solid rgba(0,232,150,0.25); }
+    .badge-violet { background: rgba(168,85,247,0.12); color: var(--violet); border: 1px solid rgba(168,85,247,0.25); }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .skill-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--muted);
+    }
+    .skill-item::before {
+      content: '▸';
+      color: var(--green); font-size: 10px;
+    }
+    .skill-item span { color: var(--text); font-weight: 500; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+    .exp-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 56px; }
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--green), var(--violet));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .exp-card:hover {
+      border-color: rgba(238,237,245,0.15);
+      background: var(--card-hover);
+      transform: translateX(4px);
+    }
+    .exp-card:hover::before { opacity: 1; }
+
+    .exp-company {
+      font-size: 12px; font-family: var(--font-mono);
+      color: var(--green); margin-bottom: 6px; letter-spacing: 0.05em;
+    }
+    .exp-title {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .exp-period {
+      font-size: 12px; font-family: var(--font-mono);
+      color: var(--muted); white-space: nowrap;
+      margin-top: 4px;
+    }
+    .exp-desc {
+      color: var(--muted); font-size: 15px; line-height: 1.75;
+      margin-bottom: 18px;
+    }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .exp-tag {
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 12px; font-family: var(--font-mono);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .exp-tag.highlight { color: var(--green); border-color: rgba(0,232,150,0.2); background: rgba(0,232,150,0.07); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg3); }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+    .skill-group-title {
+      font-size: 13px; font-family: var(--font-mono);
+      color: var(--violet); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .skill-bars { display: flex; flex-direction: column; gap: 16px; }
+    .skill-bar-item { display: flex; flex-direction: column; gap: 8px; }
+    .skill-bar-header { display: flex; justify-content: space-between; font-size: 14px; }
+    .skill-bar-name { color: var(--text); font-weight: 500; }
+    .skill-bar-pct { color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+    .skill-bar-track {
+      height: 4px; background: rgba(255,255,255,0.07);
+      border-radius: 4px; overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--green), var(--violet));
+      width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--bg); }
+    .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+    .testi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .testi-card:hover { border-color: rgba(238,237,245,0.15); transform: translateY(-3px); }
+    .testi-card.featured {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(0,232,150,0.06), rgba(168,85,247,0.06));
+      border-color: rgba(0,232,150,0.15);
+    }
+    .quote-mark {
+      font-size: 56px; line-height: 0.8;
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, var(--green), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 16px; display: block;
+    }
+    .testi-text {
+      color: var(--muted); font-size: 15px; line-height: 1.75;
+      font-style: italic; margin-bottom: 24px;
+    }
+    .testi-text strong { color: var(--text); font-style: normal; }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--violet));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: #04040a; flex-shrink: 0;
+    }
+    .testi-name { font-weight: 600; font-size: 14px; }
+    .testi-role { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg2);
+      text-align: center;
+    }
+    .contact-inner {
+      max-width: 640px; margin: 0 auto;
+    }
+    .contact-inner .section-title {
+      font-size: clamp(36px, 6vw, 64px);
+    }
+    .contact-inner .section-sub {
+      max-width: 100%; margin: 0 auto 40px;
+    }
+    .contact-links { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .contact-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 24px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 14px; font-weight: 500;
+      text-decoration: none; color: var(--text);
+      background: var(--card);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .contact-link:hover { border-color: rgba(238,237,245,0.2); background: var(--card-hover); transform: translateY(-2px); }
+    .contact-link svg { opacity: 0.6; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── GLOW ORB ── */
+    .glow-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none; z-index: 0;
+    }
+    .orb-green {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,232,150,0.18) 0%, transparent 70%);
+      top: 10%; left: -100px;
+    }
+    .orb-violet {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
+      bottom: 5%; right: -120px;
+    }
+
+    /* content above orbs */
+    #hero > *:not(canvas):not(.glow-orb) { position: relative; z-index: 1; }
+
+    @media (max-width: 768px) {
+      .about-grid, .skills-layout, .testi-grid { grid-template-columns: 1fr; }
+      .testi-card.featured { grid-column: span 1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .exp-card { grid-template-columns: 1fr; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">RS</span>
+  <div class="nav-links" style="display:flex;gap:24px;">
+    <a href="#about">About</a>
+    <a href="#experience">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#testimonials">Recognition</a>
+  </div>
+  <a href="#contact" class="nav-cta">Let's Talk</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="particle-canvas"></canvas>
+  <div class="glow-orb orb-green"></div>
+  <div class="glow-orb orb-violet"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Available for new opportunities
+  </div>
+
+  <h1 class="hero-name">Raywa Singh</h1>
+
+  <div class="hero-typewriter-wrap">
+    <span class="typewriter-prefix">I build &amp; grow</span>
+    <span class="typewriter-word" id="typewriter">startups</span>
+  </div>
+
+  <p class="hero-tagline">
+    <strong>Most engineers can't do growth. Most marketers can't ship.</strong><br>
+    I do both - at founder speed. CTO · Full-Stack Engineer · GTM Lead · AI GTM Engineer.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#experience" class="btn-primary">See My Work</a>
+    <a href="#contact" class="btn-secondary">Get In Touch →</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="3">0</div>
+      <div class="stat-label">Startups from 0→1</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.1s">
+      <div class="stat-num" data-target="3" data-suffix="x">0x</div>
+      <div class="stat-label">Platform growth driven as COO</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.2s">
+      <div class="stat-num" data-target="5" data-suffix="+">0+</div>
+      <div class="stat-label">LinkedIn recommendations</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.3s">
+      <div class="stat-num" data-target="2" data-suffix=" yrs">0 yrs</div>
+      <div class="stat-label">Founding-level experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">// about</div>
+        <h2 class="section-title">The rare hybrid<br><span style="background:linear-gradient(135deg,var(--green),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">engineer & operator.</span></h2>
+        <p>I'm Raywa - CTO at <strong>Teaqlo</strong>, building a prediction market for pop culture from 0→1. I architect the full stack, design the systems, and run AI-powered GTM workflows to bring it to users.</p>
+        <p>Before this, I was <strong>CMO and full-stack dev at Sova Dating</strong> (the first therapist-designed relational intelligence app), and <strong>COO and full-stack dev at ProductFlo</strong> - where I built the platform from scratch and tripled the company's growth trajectory.</p>
+        <p>What I'm best at: <strong>0→1 execution</strong> where engineering, product, and growth collide. Architecting MVPs that don't need to be rebuilt six months later. Building AI-powered GTM systems that replace entire functions.</p>
+        <p style="color:var(--green);font-style:italic;font-weight:500;">I don't need playbooks to start - I write the playbooks.</p>
+      </div>
+
+      <div class="about-card reveal" style="transition-delay:0.15s">
+        <div class="dual-badge">
+          <span class="badge badge-green" style="cursor:pointer" onclick="toggleBadgePanel('eng')">⌨ Engineer</span>
+          <span class="badge badge-violet" style="cursor:pointer" onclick="toggleBadgePanel('gtm')">📈 GTM Lead</span>
+          <span class="badge badge-violet" style="cursor:pointer" onclick="toggleBadgePanel('ai')">🤖 AI GTM Engineer</span>
+        </div>
+        <div id="badge-panel" style="display:none;margin-bottom:20px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);"></div>
+        <ul class="skill-list">
+          <li class="skill-item"><span>React · Next.js · TypeScript</span></li>
+          <li class="skill-item"><span>System Architecture & APIs</span></li>
+          <li class="skill-item"><span>AI-Powered GTM Workflows & Automation</span></li>
+          <li class="skill-item"><span>LLM pipelines for content & distribution</span></li>
+          <li class="skill-item"><span>Demand gen, SEO & social growth loops</span></li>
+          <li class="skill-item"><span>Brand Strategy & User Acquisition</span></li>
+          <li class="skill-item"><span>0→1 Product Execution</span></li>
+          <li class="skill-item"><span>Fundraising & Investor Narratives</span></li>
+          <li class="skill-item"><span>Cross-functional Team Leadership</span></li>
+          <li class="skill-item"><span>Performance & UX Optimization</span></li>
+        </ul>
+
+        <div style="margin-top:28px;padding-top:28px;border-top:1px solid var(--border);">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;font-family:var(--font-mono);">// stack</div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--green);line-height:1.8;">
+            React · Next.js · TypeScript<br>
+            Tailwind CSS · Node.js · REST APIs<br>
+            AI/LLM tooling · GTM systems
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">// experience</div>
+      <h2 class="section-title">Where I've built.</h2>
+      <p class="section-sub">Three founding-level roles. Each one shipping production code and driving growth simultaneously.</p>
+    </div>
+
+    <div class="exp-grid">
+
+      <div class="exp-card reveal" style="transition-delay:0.1s">
+        <div>
+          <div class="exp-company">TEAQLO · 2026 – PRESENT</div>
+          <div class="exp-title">CTO / Founding Engineer</div>
+          <div class="exp-desc">
+            Building a prediction market for pop culture from the ground up as sole founding engineer. Full ownership across the entire stack.
+            <ul style="margin-top:12px;display:flex;flex-direction:column;gap:8px;padding-left:0;list-style:none;">
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Architected and shipped the full-stack platform in Next.js 14 (App Router), TypeScript, Tailwind CSS, and a real-time backend with live market pricing logic</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Designed the prediction market engine - probability curves, resolution logic, user balance ledger, and event lifecycle state machine from scratch</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Built AI-powered GTM workflows using LLMs to automate content, social distribution, and user acquisition - replacing a full marketing function</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Set up CI/CD pipeline, environment config, database schema, and Vercel deployments for scalable production releases</li>
+            </ul>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">Full-Stack</span>
+            <span class="exp-tag highlight">Systems Design</span>
+            <span class="exp-tag">AI/GTM</span>
+            <span class="exp-tag">Product Architecture</span>
+            <span class="exp-tag">0→1</span>
+          </div>
+        </div>
+        <div>
+          <div class="exp-period">Mar 2026<br>Present</div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.2s">
+        <div>
+          <div class="exp-company">SOVA DATING · 2025 – PRESENT</div>
+          <div class="exp-title">CMO & Full-Stack Developer</div>
+          <div class="exp-desc">
+            Dual role owning both GTM strategy and full-stack development at the first therapist-designed relational intelligence app.
+            <ul style="margin-top:12px;display:flex;flex-direction:column;gap:8px;padding-left:0;list-style:none;">
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span><span>Grew the waitlist and community to <strong style="color:var(--text)">2,000+ organic users</strong> through brand-led content strategy and cross-platform community engagement</span></li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Built and shipped full-stack features end-to-end - frontend components, backend integrations, and systems architecture in collaboration with engineering</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Owned investor-facing communication and fundraising narrative, translating product vision into compelling growth metrics and brand story</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Established brand voice, visual identity system, and marketing playbook from 0 - positioning Sova as a category-defining app in the dating space</li>
+            </ul>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">Marketing Strategy</span>
+            <span class="exp-tag highlight">Full-Stack Dev</span>
+            <span class="exp-tag">Brand Identity</span>
+            <span class="exp-tag">Fundraising</span>
+            <span class="exp-tag">User Acquisition</span>
+          </div>
+        </div>
+        <div>
+          <div class="exp-period">Nov 2025<br>Present</div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.3s">
+        <div>
+          <div class="exp-company">PRODUCTFLO · 2025 – 2025</div>
+          <div class="exp-title">COO & Full-Stack Developer</div>
+          <div class="exp-desc">
+            Led both engineering and operations at a hardware version-control startup - building the platform from scratch while running the company.
+            <ul style="margin-top:12px;display:flex;flex-direction:column;gap:8px;padding-left:0;list-style:none;">
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Built the full company website and product platform end-to-end in React, Next.js, TypeScript, and Tailwind CSS - from zero to production</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Integrated third-party APIs and backend services; optimised performance and cross-device rendering across the entire product</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Drove a <strong style="color:var(--text)">3x growth in online presence</strong> as COO by owning GTM, brand, and growth execution alongside engineering</li>
+              <li style="display:flex;gap:10px;"><span style="color:var(--green);flex-shrink:0;">▸</span>Managed fundraising communications, cross-functional team alignment, and company operations strategy</li>
+            </ul>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">React / Next.js</span>
+            <span class="exp-tag highlight">TypeScript</span>
+            <span class="exp-tag">Operations</span>
+            <span class="exp-tag">GTM</span>
+            <span class="exp-tag">Tailwind CSS</span>
+            <span class="exp-tag">API Integration</span>
+          </div>
+        </div>
+        <div>
+          <div class="exp-period">Feb 2025<br>Dec 2025</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">// skills</div>
+      <h2 class="section-title">Built different.</h2>
+      <p class="section-sub">The rare combination of deep engineering and go-to-market instinct - both at a founding level.</p>
+    </div>
+
+    <div class="skills-layout">
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="skill-group-title">Engineering</div>
+        <div class="skill-bars">
+          <div class="skill-bar-item" data-pct="95">
+            <div class="skill-bar-header"><span class="skill-bar-name">React / Next.js</span><span class="skill-bar-pct">95%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="90">
+            <div class="skill-bar-header"><span class="skill-bar-name">TypeScript</span><span class="skill-bar-pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="88">
+            <div class="skill-bar-header"><span class="skill-bar-name">Systems Design & APIs</span><span class="skill-bar-pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="85">
+            <div class="skill-bar-header"><span class="skill-bar-name">Tailwind CSS / UI</span><span class="skill-bar-pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="82">
+            <div class="skill-bar-header"><span class="skill-bar-name">AI / LLM Integration</span><span class="skill-bar-pct">82%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="skill-group-title">Growth & Operator</div>
+        <div class="skill-bars">
+          <div class="skill-bar-item" data-pct="92">
+            <div class="skill-bar-header"><span class="skill-bar-name">GTM Strategy</span><span class="skill-bar-pct">92%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="88">
+            <div class="skill-bar-header"><span class="skill-bar-name">Brand & Marketing</span><span class="skill-bar-pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="90">
+            <div class="skill-bar-header"><span class="skill-bar-name">0→1 Product Execution</span><span class="skill-bar-pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="85">
+            <div class="skill-bar-header"><span class="skill-bar-name">Fundraising Narratives</span><span class="skill-bar-pct">85%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+          <div class="skill-bar-item" data-pct="90">
+            <div class="skill-bar-header"><span class="skill-bar-name">Team Leadership</span><span class="skill-bar-pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">// projects</div>
+      <h2 class="section-title">Things I've shipped.</h2>
+      <p class="section-sub">Personal projects at the intersection of engineering, AI, and product thinking.</p>
+    </div>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <div class="exp-card reveal" style="transition-delay:0.1s;grid-template-columns:1fr;">
+        <div>
+          <div class="exp-company">TEAQLO · 2026</div>
+          <div class="exp-title">Prediction Market for Pop Culture</div>
+          <div class="exp-desc">
+            Built from scratch as founding engineer - a full-stack prediction market where users bet on pop culture outcomes. Architected the entire system: frontend in React/Next.js, backend APIs, real-time data, and an AI-powered GTM layer to drive user acquisition.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">Next.js</span>
+            <span class="exp-tag highlight">Full-Stack</span>
+            <span class="exp-tag">AI/GTM</span>
+            <span class="exp-tag">Real-time</span>
+            <span class="exp-tag">0→1</span>
+          </div>
+          <div style="margin-top:16px;">
+            <a href="https://teaqlo.com/" target="_blank" style="font-size:12px;font-family:var(--font-mono);color:var(--green);text-decoration:none;border-bottom:1px solid rgba(0,232,150,0.3);">teaqlo.com →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.15s;grid-template-columns:1fr;">
+        <div>
+          <div class="exp-company">PERSONAL PROJECT · 2025</div>
+          <div class="exp-title">75Kind - PMS-Safe 75Hard App</div>
+          <div class="exp-desc">
+            A full-stack habit and challenge tracking app that reimagines 75Hard with compassion - featuring a PMS-Safe mode that dynamically adjusts expectations, language, and water goals during a configurable window. Built with Supabase auth, daily checklists, streak logic, AI encouragement prompts, and progress analytics across 75 days.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">React + TypeScript</span>
+            <span class="exp-tag highlight">Supabase</span>
+            <span class="exp-tag">Tailwind / shadcn-ui</span>
+            <span class="exp-tag">AI Prompts</span>
+            <span class="exp-tag">Vite</span>
+          </div>
+          <div style="margin-top:16px;">
+            <a href="https://github.com/Raywa10/75-day-hard-PMS-Safe" target="_blank" style="font-size:12px;font-family:var(--font-mono);color:var(--green);text-decoration:none;border-bottom:1px solid rgba(0,232,150,0.3);">github.com/Raywa10/75-day-hard-PMS-Safe →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.25s;grid-template-columns:1fr;">
+        <div>
+          <div class="exp-company">PERSONAL PROJECT · 2025</div>
+          <div class="exp-title">Mission Thrombectomy Portal</div>
+          <div class="exp-desc">
+            A clinical workflow platform built 0→1 for stroke care teams - enabling rapid (&lt;60s) thrombectomy case logging, global access metrics, and structured data flow. Worked directly with neurology stakeholders to translate complex clinical workflows into a clean, error-free UI. Set up the full engineering pipeline: repo, CI/CD, API integration, and database schema on Vercel.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">React + TypeScript</span>
+            <span class="exp-tag highlight">Tailwind / shadcn-ui</span>
+            <span class="exp-tag">Supabase</span>
+            <span class="exp-tag">Vercel CI/CD</span>
+            <span class="exp-tag">0→1</span>
+          </div>
+          <div style="margin-top:16px;">
+            <a href="https://github.com/Raywa10/thrombectomy-portal" target="_blank" style="font-size:12px;font-family:var(--font-mono);color:var(--green);text-decoration:none;border-bottom:1px solid rgba(0,232,150,0.3);">github.com/Raywa10/thrombectomy-portal →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.3s;grid-template-columns:1fr;">
+        <div>
+          <div class="exp-company">PERSONAL PROJECT · 2025</div>
+          <div class="exp-title">miniCMO - AI GTM Agent</div>
+          <div class="exp-desc">
+            An AI-powered Go-To-Market agent that turns a product idea into a full launch strategy in 60 seconds - covering positioning, ICP personas, channel strategy, a day-by-day launch calendar, email sequences, and competitor angles. The intelligence lives in a structured prompt engineering layer enforcing specificity, cross-section consistency, and brand voice adaptation. Not a ChatGPT wrapper - it reasons like a senior GTM strategist.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag highlight">React 18 + Vite</span>
+            <span class="exp-tag highlight">OpenAI / GPT-4o</span>
+            <span class="exp-tag">Supabase Auth</span>
+            <span class="exp-tag">Framer Motion</span>
+            <span class="exp-tag">Express</span>
+          </div>
+          <div style="margin-top:16px;">
+            <a href="https://github.com/Raywa10/miniCMO" target="_blank" style="font-size:12px;font-family:var(--font-mono);color:var(--green);text-decoration:none;border-bottom:1px solid rgba(0,232,150,0.3);">github.com/Raywa10/miniCMO →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top:32px;text-align:center;transition-delay:0.3s;">
+      <a href="https://github.com/Raywa10/" target="_blank" class="btn-secondary" style="display:inline-flex;align-items:center;gap:10px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        See more on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">// testimonials</div>
+      <h2 class="section-title">What people say.</h2>
+      <p class="section-sub">From teammates, managers, and clients who've seen the work up close. <a href="https://www.linkedin.com/in/raywa-singh/" target="_blank" style="color:var(--green);text-decoration:none;border-bottom:1px solid rgba(0,232,150,0.3);">See all recommendations on LinkedIn →</a></p>
+    </div>
+
+    <div class="testi-grid" style="margin-top:56px;">
+
+      <div class="testi-card featured reveal" style="transition-delay:0.05s">
+        <span class="quote-mark">"</span>
+        <p class="testi-text">Raywa is a <strong>rare full-stack builder and operator</strong>. She is genuinely someone who moves fast, ships quality work, and takes real ownership. She contributed across engineering and product while also leading a team of interns and supporting investor conversations. She helped drive a ~300% growth in our online presence and brought a level of initiative and reliability you rarely find. <strong>Any team would be lucky to have her.</strong></p>
+        <div class="testi-author">
+          <div class="testi-avatar">SK</div>
+          <div>
+            <div class="testi-name">Serge KADJO</div>
+            <div class="testi-role">Building the most important piece of software for #hardware · managed Raywa directly</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:0.1s">
+        <span class="quote-mark">"</span>
+        <p class="testi-text">Raywa is <strong>highly skilled and genuinely great to work with</strong>. She has a strong eye for building clean, user-friendly interfaces and consistently turns ideas into polished, thoughtful products. As a manager, she was supportive, provided clear and actionable feedback.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RE</div>
+          <div>
+            <div class="testi-name">Rimsha Ejaz</div>
+            <div class="testi-role">APM @ Resmed · CS @ Oregon State · reported to Raywa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:0.15s">
+        <span class="quote-mark">"</span>
+        <p class="testi-text">She took a stalled idea and built the product end-to-end. I had a vision without knowing how to execute and Raywa took ownership of features and even came up with ideas I didn't have. <strong>She is great at working independently to bring things from 0→1.</strong> I trust her entirely and couldn't build my dream without her!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">HP</div>
+          <div>
+            <div class="testi-name">Haley Pilgrim</div>
+            <div class="testi-role">Strategy · Operations · Sociology · Raywa's client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:0.2s">
+        <span class="quote-mark">"</span>
+        <p class="testi-text">Raywa was responsible for distributing full-stack development tasks and approving code reviews. She did way more than just assigned tasks - <strong>she was an amazing leader and helped me expand my technical knowledge from the start.</strong></p>
+        <div class="testi-author">
+          <div class="testi-avatar">ML</div>
+          <div>
+            <div class="testi-name">Michael James Leonick</div>
+            <div class="testi-role">Digital Solutions Developer · Software Dev Intern @ ProductFlo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:0.25s">
+        <span class="quote-mark">"</span>
+        <p class="testi-text">Raywa did amazing work organizing our team and managing social media across platforms. She utilized skills in networking to <strong>increase brand outreach and was integral in ideating events and their execution.</strong></p>
+        <div class="testi-author">
+          <div class="testi-avatar">AS</div>
+          <div>
+            <div class="testi-name">Ashley Senciboy</div>
+            <div class="testi-role">Co-Founder & COO, Sova Dating · worked with Raywa</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <div class="section-label">// contact</div>
+      <h2 class="section-title">Let's build<br><span style="background:linear-gradient(135deg,var(--green),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">something great.</span></h2>
+      <p class="section-sub" style="margin:20px auto 40px;">If you need someone who can code, do GTM, or do both - reach out. I'm open to founding roles, senior engineering, and growth-adjacent positions.</p>
+      <div class="contact-links">
+        <a href="mailto:raywasingh.10@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Raywa
+        </a>
+        <a href="https://www.linkedin.com/in/raywa-singh/" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/Raywa10/" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span style="background:linear-gradient(135deg,var(--green),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Raywa Singh</span> · Built with code & ambition · 2026
+</footer>
+
+<script>
+// ── TYPEWRITER ──────────────────────────────────────────────────────────────
+const words = ['startups', 'products', 'growth engines', 'full-stack MVPs', 'AI workflows', 'experiences'];
+let wi = 0, ci = 0, deleting = false;
+const tw = document.getElementById('typewriter');
+
+function typeStep() {
+  const word = words[wi];
+  if (!deleting) {
+    ci++;
+    tw.textContent = word.slice(0, ci);
+    if (ci === word.length) { deleting = true; setTimeout(typeStep, 1800); return; }
+  } else {
+    ci--;
+    tw.textContent = word.slice(0, ci);
+    if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+  }
+  setTimeout(typeStep, deleting ? 55 : 95);
+}
+typeStep();
+
+// ── PARTICLE CANVAS ─────────────────────────────────────────────────────────
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [], W, H, animEnabled = true;
+const mouse = { x: -999, y: -999 };
+
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', () => { resize(); initParticles(); });
+
+canvas.addEventListener('mousemove', e => {
+  const r = canvas.getBoundingClientRect();
+  mouse.x = e.clientX - r.left;
+  mouse.y = e.clientY - r.top;
+});
+canvas.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+
+function initParticles() {
+  particles = [];
+  const n = Math.floor((W * H) / 12000);
+  for (let i = 0; i < n; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5,
+    });
+  }
+}
+initParticles();
+
+function drawParticles() {
+  if (!animEnabled) return;
+  ctx.clearRect(0, 0, W, H);
+
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+    const dx = p.x - mouse.x, dy = p.y - mouse.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 100) {
+      p.x += dx / dist * 1.5;
+      p.y += dy / dist * 1.5;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,232,150,0.6)';
+    ctx.fill();
+  });
+
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(0,232,150,${0.12 * (1 - d/120)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// ── SCROLL REVEAL ───────────────────────────────────────────────────────────
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      const num = e.target.querySelector('.stat-num[data-target]');
+      if (num) animateStat(num);
+      e.target.querySelectorAll('.skill-bar-item').forEach(bar => {
+        const fill = bar.querySelector('.skill-bar-fill');
+        if (fill) fill.style.width = bar.dataset.pct + '%';
+      });
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => io.observe(el));
+
+const skillItems = document.querySelectorAll('.skill-bar-item[data-pct]');
+const skillIo = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const fill = e.target.querySelector('.skill-bar-fill');
+      if (fill) {
+        setTimeout(() => { fill.style.width = e.target.dataset.pct + '%'; }, 150);
+      }
+      skillIo.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+skillItems.forEach(el => skillIo.observe(el));
+
+// ── STAT COUNTERS ───────────────────────────────────────────────────────────
+function animateStat(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1400;
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(ease * target) + suffix;
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── BADGE PANELS ────────────────────────────────────────────────────────────
+const badgeContent = {
+  eng: {
+    color: 'var(--green)',
+    items: [
+      'React · Next.js 14 (App Router) · TypeScript',
+      'System architecture, API design & backend integration',
+      'Tailwind CSS · shadcn-ui · performance optimisation',
+      'CI/CD pipelines, Vercel deployments, database schema design',
+      'Real-time data systems & state machine design',
+    ]
+  },
+  gtm: {
+    color: 'var(--violet)',
+    items: [
+      'Full GTM strategy ownership from 0→1 across 3 startups',
+      'Grew Sova to 2,000+ organic users via brand-led content',
+      'Drove 3x online presence growth at ProductFlo as COO',
+      'Investor narrative, fundraising communication & pitch decks',
+      'Community building, social strategy & user acquisition',
+    ]
+  },
+  ai: {
+    color: 'var(--violet)',
+    items: [
+      'Built miniCMO — AI agent generating full GTM strategies in 60s',
+      'LLM-powered content pipelines replacing full marketing functions',
+      'AI encouragement & mood-aware logic in 75Kind wellness app',
+      'Prompt engineering for specificity, consistency & brand voice',
+      'AI workflows deployed across multiple production startups',
+    ]
+  }
+};
+let activeBadge = null;
+function toggleBadgePanel(key) {
+  const panel = document.getElementById('badge-panel');
+  if (activeBadge === key) {
+    panel.style.display = 'none';
+    activeBadge = null;
+    return;
+  }
+  activeBadge = key;
+  const d = badgeContent[key];
+  panel.style.display = 'block';
+  panel.style.borderColor = d.color.replace('var(--green)', 'rgba(0,232,150,0.25)').replace('var(--violet)', 'rgba(168,85,247,0.25)');
+  panel.innerHTML = `<ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">${
+    d.items.map(i => `<li style="display:flex;gap:10px;font-size:13px;color:var(--muted)"><span style="color:${d.color};flex-shrink:0">▸</span>${i}</li>`).join('')
+  }</ul>`;
+}
+</script>
+</body>
+</html>
