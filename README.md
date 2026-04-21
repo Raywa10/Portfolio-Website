@@ -1,4 +1,4 @@
-# Raywa Singh — Personal Portfolio
+# Raywa Singh - Personal Portfolio
 
 
 A high-performance personal portfolio built to showcase my work as a CTO, Full-Stack Engineer, and GTM Lead. Designed and engineered from scratch — no templates, no component libraries, no shortcuts.
